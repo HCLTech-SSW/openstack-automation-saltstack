@@ -160,15 +160,15 @@ salt ‘*.mitaka’ test.ping (which displays all 3 Salt-Minion will be shown in
 
 8) Updated the file “data_root/openstack_cluster.sls” located in Salt-Master machine. The fields which are highlighted in the below image should be provided by the user:
 
-![Image1](https://github.com/hcltech-ssw/openstack-automation-saltstack/mitaka/images/image1.png)
+![Image1](https://github.com/hcltech-ssw/openstack-automation-saltstack/raw/mitaka/images/image1.png)
 
 9) Verify the following values in “data_root/openstack_cluster_resources.sls” the file is located in Salt-Master machine.
 
-![Image2](https://github.com/hcltech-ssw/openstack-automation-saltstack/mitaka/images/image2.png)
+![Image2](https://github.com/hcltech-ssw/openstack-automation-saltstack/raw/mitaka/images/image2.png)
 
 10) The following file as displayed in below image contains the value for the parameters which would be specified while executing the commands for every service to create users, services and endpoints etc. Before proceeding to the installation, please review and update the values as per your preferences, the file “data_root/openstack_access_resources.sls” located in Salt-Master machine.
 
-![Image3](https://github.com/hcltech-ssw/openstack-automation-saltstack/mitaka/images/image3.png)
+![Image3](https://github.com/hcltech-ssw/openstack-automation-saltstack/raw/mitaka/images/image3.png)
 
 Now Let’s Start the OpenStack Installation 
 ==========================================
@@ -209,9 +209,9 @@ How to Replicate the OpenStack Deployment (On Need basis)
 The above configurations as mentioned in Step 8 & Step 9 would create one set of OpenStack environment.
 If there is need to setup more than one replica of three node architecture OpenStack environment then following changes which are highlighted in below images would require to be made in the respective files on Salt-Master machine.
 
-![Image4](https://github.com/hcltech-ssw/openstack-automation-saltstack/mitaka/images/image4.png)
+![Image4](https://github.com/hcltech-ssw/openstack-automation-saltstack/raw/mitaka/images/image4.png)
 
-![Image5](https://github.com/hcltech-ssw/openstack-automation-saltstack/mitaka/images/image5.png)
+![Image5](https://github.com/hcltech-ssw/openstack-automation-saltstack/raw/mitaka/images/image5.png)
 
 By making the above changes, in one go of installation two replicas of OpenStack environment would be created (considering three node architecture for each replica).
 
