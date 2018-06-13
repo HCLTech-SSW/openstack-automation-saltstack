@@ -1,0 +1,45 @@
+databases: 
+  keystone:  
+    db_name: "keystone"
+    username: "keystone"
+    password: "keystone_pass"
+    service: "keystone"
+    db_sync: "keystone-manage db_sync"
+  glance: 
+    db_name: "glance"
+    username: "glance"
+    password: "glance_pass"
+    service: "glance"
+    db_sync: "glance-manage db_sync"
+  nova:
+    db_name: "nova"
+    username: "nova"
+    password: "nova_pass"
+    service: "nova"
+    db_sync: "nova-manage db sync"
+  nova_api: 
+    db_name: "nova_api"
+    username: "nova"
+    password: "nova_pass"
+    service: "nova-api"
+    db_sync: "nova-manage api_db sync"
+  nova_cell0: 
+    db_name: "nova_cell0"
+    username: "nova"
+    password: "nova_pass"
+    service: "nova-cell0"
+    cell0_register: "nova-manage cell_v2 map_cell0"
+    cell1_create: "nova-manage cell_v2 create_cell --name=cell1 --verbose"
+    cell2_discover: "nova-manage cell_v2 discover_hosts --verbose"
+  neutron: 
+    db_name: "neutron"
+    username: "neutron"
+    password: "neutron_pass"
+    service: "neutron"
+    db_sync: "neutron-db-manage"
+  cinder: 
+    db_name: "cinder"
+    username: "cinder"
+    password: "cinder_pass"
+    service: "cinder"
+    db_sync: "cinder-manage db sync"

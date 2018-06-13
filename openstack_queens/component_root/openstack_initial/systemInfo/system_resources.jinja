@@ -1,0 +1,49 @@
+
+
+{% set roles = [] %}
+{% for cluster_entity in salt['pillar.get']('roles', default=()) %}
+{% if grains['id'] in salt['pillar.get'](cluster_entity, default=()) %}
+{% do roles.append(cluster_entity) %}
+{% endif %}
+{% endfor %}
+
+
+{% set formulas = [] %}
+{% for role in roles %}
+{% for formula in salt['pillar.get']('sls:%s' % role, default=()) %}
+{% if formula not in formulas %}
+{% do formulas.append(formula) %}
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+
+
+{% set hosts = [] %}
+{% for cluster_entity in salt['pillar.get']('roles', default=()) %}
+{% for host in salt['pillar.get'](cluster_entity, default=()) %}
+{% if host not in hosts %}
+{% do hosts.append(host) %}
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+
+{% macro get_candidate(sls) -%}
+{% for host in hosts %}
+{% for cluster_entity in salt['pillar.get']('roles', default=()) %}
+{% if host in pillar[cluster_entity] %}
+{% if sls in pillar['sls'][cluster_entity] %}
+{{ host }}{% endif %}
+{% endif %}
+{% endfor %}
+{% endfor %}
+{%- endmacro %}
+
+
+{% set ip4_interfaces = [] %}
+{% for cluster_entity in grains['ip4_interfaces'] %}
+{% if pillar['neutron']['single_nic'] == cluster_entity %}
+{% do ip4_interfaces.append(grains['ip4_interfaces'][cluster_entity]|replace('[','')|replace(']','')|replace("'","")) %}
+{% endif %}
+{% endfor %}

@@ -1,0 +1,46 @@
+roles: 
+  - "controller"
+  - "compute"
+  - "blockstorage"
+controller: 
+  - "controller.queens"
+compute:
+  - "compute.queens"
+blockstorage:
+  - "blockstorage.queens"
+sls: 
+  controller:
+    - "openstack_initial.network_interface.update_network_interface"
+    - "openstack_initial.mariaDB.install_mariaDBServer"
+    - "openstack_initial.mariaDB.install_mariaDBClient"
+    - "openstack_initial.rabbitMQ.install_rabbitMQServer"
+    - "openstack_initial.mariaDB.create_dbschema"
+    - "openstack_initial.apache.install_apache2Server"
+    - "openstack_initial.etcd.install_etcd"
+    - "openstack_projects.keystone.install_service"
+    - "openstack_projects.keystone.create_projects"
+    - "openstack_projects.keystone.create_users"
+    - "openstack_projects.glance.install_service"
+    - "openstack_projects.glance.create_services"
+    - "openstack_projects.glance.create_users"
+    - "openstack_projects.glance.image_operation"
+    - "openstack_projects.nova.install_service"
+    - "openstack_projects.nova.create_services"
+    - "openstack_projects.nova.create_users"
+    - "openstack_projects.nova.utils"
+    - "openstack_projects.neutron.install_service"
+    - "openstack_projects.neutron.install_comp1"
+    - "openstack_projects.neutron.install_comp2"
+    - "openstack_projects.neutron.create_services"
+    - "openstack_projects.neutron.create_users"
+    - "openstack_projects.horizon.install_service"
+    - "openstack_projects.cinder.install_service"
+    - "openstack_projects.cinder.create_services"
+    - "openstack_projects.cinder.create_users"
+    - "openstack_post.verify_installed_services"
+  compute:
+    - "openstack_initial.network_interface.update_network_interface"
+    - "openstack_projects.nova.install_service_on_compute"
+    - "openstack_projects.neutron.install_service_on_compute"
+  blockstorage:
+    - "openstack_projects.cinder.install_service_on_block"
