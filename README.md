@@ -74,17 +74,17 @@ The following steps will be required by end users to their workstations to confi
 <pre>
 a)	Install the latest version 2017.7.5 of salt-master.
 
-	ï	Run the following command to import the SaltStack repository key:
+	‚Ä¢	Run the following command to import the SaltStack repository key:
 		wget -O - https://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/2017.7.5/SALTSTACK-GPG-KEY.pub | sudo apt-key add -
 
-	ï	Save the following line 
+	‚Ä¢	Save the following line 
 		deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/2017.7.5 xenial main
 		to /etc/apt/sources.list.d/saltstack.list
 
-	ï	Run the following command:
+	‚Ä¢	Run the following command:
 		sudo apt-get update
 
-	ï	Run the following command to install salt-master
+	‚Ä¢	Run the following command to install salt-master
       		sudo apt-get install salt-master
 
 b)	Clone the project from git to local machine.
@@ -102,81 +102,81 @@ c)	Update the salt-master configuration file in Salt-Master machine located at "
 <pre>
 a)	Install the latest version 2017.7.5 of salt-minion on all three Machines/Nodes.
 
-	ï	Run the following command to import the SaltStack repository key:
+	‚Ä¢	Run the following command to import the SaltStack repository key:
 		wget -O - https://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/2017.7.5/SALTSTACK-GPG-KEY.pub | sudo apt-key add -
 
-	ï	Save the following line 
+	‚Ä¢	Save the following line 
 		deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/2017.7.5 xenial main
 		to /etc/apt/sources.list.d/saltstack.list
 		
-	ï	Run the following command:
+	‚Ä¢	Run the following command:
 		sudo apt-get update
 
-	ï	Run the following command to install salt-master
+	‚Ä¢	Run the following command to install salt-master
       		sudo apt-get install salt-minion
 
-b)	On every Salt-Minion machine, update the ì/etc/hostsî file on every minion by adding the IP address of Salt-Master machine.
+b)	On every Salt-Minion machine, update the ‚Äú/etc/hosts‚Äù file on every minion by adding the IP address of Salt-Master machine.
 
-c)	On every Salt-Minion machine, update the ì/etc/salt/minionî file with the IP address of Salt-Master machine against ìmaster:î field.
+c)	On every Salt-Minion machine, update the ‚Äú/etc/salt/minion‚Äù file with the IP address of Salt-Master machine against ‚Äúmaster:‚Äù field.
 </pre>
 3) In order to start salt-master, execute the following command in terminal on Salt-Master machine 
 <pre>
-salt-master ñl debug
+salt-master ‚Äìl debug
 </pre>
 
 4) Update the name of all three Salt-Minion machines by executing the following commands on respective  Salt-Minion machine:
 <pre>
 a)	On Salt-Minion machine for Controller Node:
-	echo ìcontroller.queensî > /etc/salt/minion_id
+	echo ‚Äúcontroller.queens‚Äù > /etc/salt/minion_id
 
 b)	On Salt-Minion machine for Compute Node:
-	echo ìcompute.queensî > /etc/salt/minion_id
+	echo ‚Äúcompute.queens‚Äù > /etc/salt/minion_id
 
 c)	On Salt-Minion machine for Block Storage Node:
-	echo ìblockstorage.queensî > /etc/salt/minion_id
+	echo ‚Äúblockstorage.queens‚Äù > /etc/salt/minion_id
 
-d)	For each Salt-Minion machine (OpenStack nodes), the same name should be updated into the ì/etc/hostnameî.
+d)	For each Salt-Minion machine (OpenStack nodes), the same name should be updated into the ‚Äú/etc/hostname‚Äù.
 
 e)	Reboot all three Salt-Minion machines.
 </pre>
 ### Please note:
-The names like ìcontroller.queensî, ìcompute.queensî and ìblockstorage.queensî as mentioned above could be anything as per the user(s) choice, as we have considered the above mentioned name to easily visualize/identify the OpenStack nodes.
+The names like ‚Äúcontroller.queens‚Äù, ‚Äúcompute.queens‚Äù and ‚Äúblockstorage.queens‚Äù as mentioned above could be anything as per the user(s) choice, as we have considered the above mentioned name to easily visualize/identify the OpenStack nodes.
 
 5) In order to start salt-minion, execute the following command in terminal on each Salt-Minion machine (OpenStack nodes):
 <pre>
-salt-minion ñl debug
+salt-minion ‚Äìl debug
 </pre>
 
 6) Every Salt-Minion machine should be registered on Salt-Master machine, in order to register the minion execute the following command on Salt-Master machine:
 <pre>
-salt-key ña ìcontroller.queensî
-salt-key ña ìcompute.queensî
-salt-key ña ìblockstorage.queensî
+salt-key ‚Äìa ‚Äúcontroller.queens‚Äù
+salt-key ‚Äìa ‚Äúcompute.queens‚Äù
+salt-key ‚Äìa ‚Äúblockstorage.queens‚Äù
 </pre>
 
 7) In order to verify the status of Salt-Minion machine registration with master, execute the following command on Salt-Master machine:
 <pre>
-salt ë*.queensí test.ping (which displays all 3 Salt-Minion will be shown in green color.)
+salt ‚Äò*.queens‚Äô test.ping (which displays all 3 Salt-Minion will be shown in green color.)
 </pre>
 
-8) Updated the file ìdata_root/openstack_cluster.slsî located in Salt-Master machine. The fields which are highlighted in the below image should be provided by the user:
+8) Updated the file ‚Äúdata_root/openstack_cluster.sls‚Äù located in Salt-Master machine. The fields which are highlighted in the below image should be provided by the user:
 
-![Image1](https://github.com/hcltech-ssw/openstack-automation-saltstack/raw/mitaka/images/image1.png)
+![Image1](https://github.com/HCLTech-SSW/openstack-automation-saltstack/blob/queens/images/image1.png)
 
-9) Verify the following values in ìdata_root/openstack_cluster_resources.slsî the file is located in Salt-Master machine.
+9) Verify the following values in ‚Äúdata_root/openstack_cluster_resources.sls‚Äù the file is located in Salt-Master machine.
 
-![Image2](https://github.com/hcltech-ssw/openstack-automation-saltstack/raw/mitaka/images/image2.png)
+![Image2](https://github.com/HCLTech-SSW/openstack-automation-saltstack/blob/queens/images/image2.png)
 
-10) The following file as displayed in below image contains the value for the parameters which would be specified while executing the commands for every service to create users, services and endpoints etc. Before proceeding to the installation, please review and update the values as per your preferences, the file ìdata_root/openstack_access_resources.slsî located in Salt-Master machine.
+10) The following file as displayed in below image contains the value for the parameters which would be specified while executing the commands for every service to create users, services and endpoints etc. Before proceeding to the installation, please review and update the values as per your preferences, the file ‚Äúdata_root/openstack_access_resources.sls‚Äù located in Salt-Master machine.
 
-![Image3](https://github.com/hcltech-ssw/openstack-automation-saltstack/raw/mitaka/images/image3.png)
+![Image3](https://github.com/HCLTech-SSW/openstack-automation-saltstack/blob/queens/images/image3.png)
 
-Now Letís Start the OpenStack Installation 
+Now Let‚Äôs Start the OpenStack Installation 
 ==========================================
-We are done with configuring salt-master and salt-minion machines, now letís start the OpenStack installation. 
+We are done with configuring salt-master and salt-minion machines, now let‚Äôs start the OpenStack installation. 
 In order to start the installation, execute the following command from terminal on Salt-Master machine:
 <pre>
-	salt ë*.queensí state.highstate
+salt ‚Äò*.queens‚Äô state.highstate
 </pre>
 After successful installation, all three Salt-Minion machines turned into OpenStack environment with the following components installed: 
 
@@ -211,9 +211,9 @@ How to Replicate the OpenStack Deployment (On Need basis)
 The above configurations as mentioned in Step 8 & Step 9 would create one set of OpenStack environment.
 If there is need to setup more than one replica of three node architecture OpenStack environment then following changes which are highlighted in below images would require to be made in the respective files on Salt-Master machine.
 
-![Image4](https://github.com/hcltech-ssw/openstack-automation-saltstack/raw/mitaka/images/image4.png)
+![Image4](https://github.com/HCLTech-SSW/openstack-automation-saltstack/blob/queens/images/image4.png)
 
-![Image5](https://github.com/hcltech-ssw/openstack-automation-saltstack/raw/mitaka/images/image5.png)
+![Image5](https://github.com/HCLTech-SSW/openstack-automation-saltstack/blob/queens/images/image5.png)
 
 By making the above changes, in one go of installation two replicas of OpenStack environment would be created (considering three node architecture for each replica).
 
@@ -381,7 +381,7 @@ Following are the commonly faced problems along with the troubleshooting steps:
   causes salt-minion to start the infinite loop of jobs.<br>
   3. After revalidating the states files for any logical errors, restart the
   salt-minion daemon.<br>
-  <i><span style='mso-spacerun:yes'>†</span><span class=GramE><b
+  <i><span style='mso-spacerun:yes'>¬†</span><span class=GramE><b
   style='mso-bidi-font-weight:normal'>salt-minion</b></span><b
   style='mso-bidi-font-weight:normal'> -l debug</b> <br>
   </i>4. And then start the execution of salt command from salt-master for a particular
@@ -424,7 +424,7 @@ Following are the commonly faced problems along with the troubleshooting steps:
   3. Even if a user wants to run the individual state on individual minion, he/she
   needs to specify at least one state under each role.<br>
   4. And can execute the salt-command by specifying that minion node.<br>
-  5. Letís say he/she wants to install <span class=SpellE>MariaDB</span> on
+  5. Let‚Äôs say he/she wants to install <span class=SpellE>MariaDB</span> on
   controller node, then in cluster resources he needs to at least specify an
   individual <span class=SpellE>sls</span> under every node either it is
   compute or storage, but can execute the salt-command for an individual node.<i><br>
